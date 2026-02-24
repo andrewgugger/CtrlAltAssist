@@ -1,0 +1,12 @@
+# API Keys
+credentials.json
+token.json
+
+# Data/Logs
+reminders.json
+analysis/
+
+# Python clutter
+__pycache__/
+*.py[cod]
+venv/
