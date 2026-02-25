@@ -17,7 +17,17 @@ TARS is a multi-functional Python assistant inspired by OpenClaw. Powered by **O
 
 ## 🚀 Getting Started
 
-### 1. Prerequisites
+### 1. Installation
+```bash
+# Clone the repo
+git clone https://github.com/andrewgugger/CtrlAltAssist.git
+cd CtrlAltAssist
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 2. Prerequisites
 * **Python 3.10+**
 * **Ollama** installed and running (with `gemma3:4b` pulled)
 * **Telegram Bot Token** (Get one from [@BotFather](https://t.me/botfather))
@@ -36,16 +46,6 @@ TARS is a multi-functional Python assistant inspired by OpenClaw. Powered by **O
   username ALL=(root) NOPASSWD: /usr/bin/python3 /path/to/torrent.py *
   ```
 
-
-### 2. Installation
-```bash
-# Clone the repo
-git clone https://github.com/andrewgugger/CtrlAltAssist.git
-cd CtrlAltAssist
-
-# Install dependencies
-pip install -r requirements.txt
-```
 
 ### 3. Configuration
 * Add your telegram token from the [@BotFather](https://t.me/botfather) and user ID to the .env file.
