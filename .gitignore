@@ -3,8 +3,8 @@ credentials.json
 token.json
 
 # Data/Logs
-reminders.json
-analysis/
+#reminders.json
+#analysis/
 
 # Python clutter
 __pycache__/

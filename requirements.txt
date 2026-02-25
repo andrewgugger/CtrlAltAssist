@@ -4,5 +4,9 @@ google_auth_oauthlib==1.2.4
 ollama==0.6.1
 protobuf==6.33.5
 pyTelegramBotAPI==4.31.0
+python-dotenv==1.2.1
 qbittorrent_api==2025.11.1
 Requests==2.32.5
+
+
+

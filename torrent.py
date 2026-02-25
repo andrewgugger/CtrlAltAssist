@@ -4,6 +4,10 @@ import qbittorrentapi
 import sys
 import requests
 import os
+from dotenv import load_dotenv
+
+# telergram bot token and telegram user id from .env file
+load_dotenv()
 
 # --- SETTINGS ---
 QBT_USER = os.getenv("QBT_USER")
@@ -14,7 +18,7 @@ def main():
     #function to send updates
     def send_telegram_update(text):
         token = os.getenv("TELEGRAM_TOKEN")
-        chat_id = os.getenv("ALLOWED_USER_ID")
+        chat_id = int(os.getenv("ALLOWED_USER_ID"))
         url = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&text={text}"
         requests.get(url)
 

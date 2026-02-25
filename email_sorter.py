@@ -7,6 +7,10 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import sys
 import requests
+from dotenv import load_dotenv
+
+# telergram bot token and telegram user id from .env file
+load_dotenv()
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
@@ -188,7 +192,7 @@ def main():
 
     def send_telegram_update(text):
         token = os.getenv("TELEGRAM_TOKEN")
-        chat_id = os.getenv("ALLOWED_USER_ID")
+        chat_id = int(os.getenv("ALLOWED_USER_ID"))
         url = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&text={text}"
         requests.get(url)
 

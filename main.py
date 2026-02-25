@@ -10,10 +10,12 @@ import subprocess
 import shlex
 from pathlib import Path
 import sys
+from dotenv import load_dotenv
 
 # telergram bot token and telegram user id from .env file
+load_dotenv()
 TOKEN = os.getenv("TELEGRAM_TOKEN")
-ALLOWED_USER_ID = os.getenv("ALLOWED_USER_ID")
+ALLOWED_USER_ID = int(os.getenv("ALLOWED_USER_ID"))
 
 bot = telebot.TeleBot(TOKEN)
 # json file storing all reminders
