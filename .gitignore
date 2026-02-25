@@ -1,9 +1,10 @@
 # API Keys
 credentials.json
 token.json
+.env
 
 # Data/Logs
-#reminders.json
+reminders.json
 #analysis/
 
 # Python clutter
