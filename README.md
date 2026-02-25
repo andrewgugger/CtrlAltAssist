@@ -8,7 +8,7 @@ TARS is a multi-functional Python assistant inspired by OpenClaw. Powered by **O
 
 * **🧠 Local Intelligence:** Uses Ollama (Gemma 3) for private, local LLM processing—no data leaves your machine except for the API calls you define.
 * **📧 Gmail Sorter:** Automatically categorizes unread emails into labels `ec_save`, `ec_delete`, or `ec_not_sure` using AI logic.
-* **⏰ Smart Reminders:** Set reminders in natural language (e.g., `/remind 10m check the oven`).
+* **⏰ Smart Reminders:** Set reminders using a command and ask about them using natural language. (e.g., `/remind 10m check the oven` and `What are my reminders for today?`).
 * **📂 File Analysis:** Give TARS a file from your `analysis/` folder to have him "read" and discuss its contents.
 * **📡 Remote Torrenting:** Securely sends magnet links to a remote server via SSH.
 * **🔒 Secure:** Hard-coded access control ensures TARS only speaks to you.
@@ -21,7 +21,7 @@ TARS is a multi-functional Python assistant inspired by OpenClaw. Powered by **O
 * **Python 3.10+**
 * **Ollama** installed and running (with `gemma3:4b` pulled)
 * **Telegram Bot Token** (Get one from [@BotFather](https://t.me/botfather))
-* **Enable Gmail API** Enable Gmail API:
+* **Enable Gmail API**:
   * Go to the Google Cloud Console. 
   * Create a new project. 
   * Search for "Gmail API" and enable it. 
@@ -48,17 +48,25 @@ pip install -r requirements.txt
 * `/help` Displays a list of all the available commands.
 * `/reset` This will wipe the chat history.
 * `/read filename.txt `It will look for a file matching filename.txt in the
-analysis directory and feed it to the local LLM so you can ask it questions.
+analysis directory and feed it to the local LLM so you can ask it questions about the file's contents.
 * `/clean_emails 100` This will sort through 100 unread emails and decide if it should be 
 deleted, saved, or kept. **IT WILL NOT DELETE EMAILS**, it will place them in labels `ec_save`, `ec_not_sure`, or `ec_delete`
 for you to review. Enter any number of emails you would like it to sort through.
 * `/remind 10m buy milk` Set a reminder, use m for minutes, h for hours, and d for days.
-You will receive a telegram message of your reminder. You can also ask the LLM what reminders you have set.
+You will receive a telegram message of your reminder. You can also ask the LLM what reminders you have set using natural language.
 * `/clear_reminders` Clears all reminders you had set.
 * `/exit` Stops the bot and python script.
 
 ---
 
+## 🚀 Project Roadmap
+
+| Feature                       | Status                                                                | Description                                                      |
+|:------------------------------|:----------------------------------------------------------------------|:-----------------------------------------------------------------|
+| **Change Model**              | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)     | Allows the user to switch the local LLM they are using from the chat. |
+| **Natural Language Reminder** | ![In Progress](https://img.shields.io/badge/Status-Planned-lightgrey) | Enable users to set reminders using natural language.            |
+
+---
 ## ⚠️ Disclaimer
 
 This project is provided "as is" for educational and personal use. By using this software, you acknowledge that:
@@ -67,3 +75,5 @@ This project is provided "as is" for educational and personal use. By using this
 * **Liability:** The author is not responsible for any data loss, server downtime, or security breaches resulting from the use or misuse of this script.
 
 **Use at your own risk.**
+
+
