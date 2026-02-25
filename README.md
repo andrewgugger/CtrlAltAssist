@@ -28,6 +28,14 @@ TARS is a multi-functional Python assistant inspired by OpenClaw. Powered by **O
   * Go to Credentials -> Create Credentials -> OAuth client ID. 
   * Select Desktop app. 
   * Download the JSON file, rename it to credentials.json, and place it in your project folder.
+* **The below steps are only required to enable torrenting**:
+  * Configure qBittorrent CLI on remote server.
+  * Create a user with restricted access that is only able to execute the python script, add these lines to the sudoers file:
+  ```bash
+  username ALL=(ALL) !ALL
+  username ALL=(root) NOPASSWD: /usr/bin/python3 /path/to/torrent.py *
+  ```
+
 
 ### 2. Installation
 ```bash
@@ -41,8 +49,12 @@ pip install -r requirements.txt
 
 ### 3. Configuration
 * Add your telegram token from the [@BotFather](https://t.me/botfather) and user ID to the .env file.
-* **Optional:** Add your ssh target (username and server IP or hostname) and the path where your torrent.py file will be kept.
-
+* **The below configuration steps are optional. They are only required to enable the torrent functionality.**
+  * Add your ssh target (username and server IP or hostname) and the path where your torrent.py file will be kept to the .env file.
+  * Add your qBittorrent username and password to the .env file.
+  * Place the torrent.py script and a copy of .env file on a remote server where you will torrent.
+  * Currently, the script begins seeding after torrenting, maintaining a ratio limit of 1.5. This can be adjusted in the variables
+  `ratio_limit` and `seeding_time_limit`.
 
 ### 4. Commands
 * `/help` Displays a list of all the available commands.
