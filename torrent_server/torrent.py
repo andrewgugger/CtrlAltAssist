@@ -5,6 +5,7 @@ import sys
 import requests
 import os
 from dotenv import load_dotenv
+import re
 
 # telergram bot token and telegram user id from .env file
 load_dotenv()
@@ -33,6 +34,8 @@ def main():
         return
     # Get the link from the command line argument
     MAGNET_LINK = sys.argv[1]
+    # Extract unique hash from magnet link
+    info_hash = re.search(r'btih:([a-zA-Z0-9]+)', MAGNET_LINK).group(1).lower()
 
     try:
         # 1. Connect to qBittorrent
@@ -62,10 +65,12 @@ def main():
         beginning = False
 
         while True:
-            # Get the most recent torrent
-            torrents = qbt.torrents_info(sort='added_on', reverse=True)
+            # Look for ONLY the specific torrent we just added
+            torrents = qbt.torrents_info(torrent_hashes=info_hash)
+
             if not torrents:
-                break
+                time.sleep(2)  # Wait for qBT to register the new link
+                continue
 
             t = torrents[0]
 
@@ -76,7 +81,7 @@ def main():
             #sys.stdout.flush()
 
             progress_pct = int(progress)  # Get whole number like 25, 26.
-            if not beginning:
+            if not beginning and t.name != info_hash:
                 beginning = True
                 filename = t.name
                 send_telegram_update(f"📥 Started downloading: {filename}")
