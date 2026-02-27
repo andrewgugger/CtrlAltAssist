@@ -1,6 +1,6 @@
 # 🤖 CtrlAltAssist: A repo for using local LLMs to automate tasks.
 
-TARS is a multi-functional Python assistant inspired by OpenClaw. Powered by **Ollama (Gemma 3)** and **Telegram**, it manages your reminders, cleans your Gmail inbox, handles remote torrenting via SSH, and analyzes local files.
+TARS is a multi-functional AI agent inspired by OpenClaw. Powered by **Python**, **Ollama (Gemma 3)** and **Telegram**, it manages your reminders, cleans your Gmail inbox, handles remote torrenting via SSH, and analyzes local files.
 
 ---
 
@@ -9,9 +9,9 @@ TARS is a multi-functional Python assistant inspired by OpenClaw. Powered by **O
 * **🧠 Local Intelligence:** Uses Ollama (Gemma 3) for private, local LLM processing—no data leaves your machine except for the API calls you define.
 * **📧 Gmail Sorter:** Automatically categorizes unread emails into labels `ec_save`, `ec_delete`, or `ec_not_sure` using AI logic.
 * **⏰ Smart Reminders:** Set reminders using a command and ask about them using natural language. (e.g., `/remind 10m check the oven` and `What are my reminders for today?`).
-* **📂 File Analysis:** Give TARS a file from your `analysis/` folder to have him "read" and discuss its contents.
+* **📂 File Analysis:** Give your agent a file from your `analysis/` folder to have it "read" and discuss its contents.
 * **📡 Remote Torrenting:** Securely sends magnet links to a remote server via SSH.
-* **🔒 Secure:** Hard-coded access control ensures TARS only speaks to you.
+* **🔒 Secure:** Hard-coded access control ensures your AI agent only speaks to you.
 
 ---
 
@@ -77,6 +77,7 @@ You will receive a telegram message of your reminder. You can also ask the LLM w
 |:------------------------------|:----------------------------------------------------------------------|:-----------------------------------------------------------------|
 | **Change Model**              | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)     | Allows the user to switch the local LLM they are using from the chat. |
 | **Natural Language Reminder** | ![In Progress](https://img.shields.io/badge/Status-Planned-lightgrey) | Enable users to set reminders using natural language.            |
+| **Start-up Script**           | ![In Progress](https://img.shields.io/badge/Status-Planned-lightgrey) | Run a startup script to help users with installation.            |
 
 ---
 ## ⚠️ Disclaimer
