@@ -16,6 +16,8 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 ALLOWED_USER_ID = int(os.getenv("ALLOWED_USER_ID"))
+your_name = os.getenv("YOUR_NAME")
+bot_name = os.getenv("BOT_NAME")
 
 bot = telebot.TeleBot(TOKEN)
 # json file storing all reminders
@@ -28,16 +30,13 @@ scheduler = BackgroundScheduler()
 scheduler.start()
 
 # This list will store the conversation history
-# We start it with a 'system' message to define Nova's personality.
-#**************************
-#Add your name to the prompt below
-#**************************
+# We start it with a 'system' message to define bot's personality
 chat_history = [
     {
         'role': 'system',
-        'content': """
-            Your name is TARS, you are Cooper's virtual assistant. 
-            Cooper knows who you are. 
+        'content': f"""
+            Your name is {bot_name}, you are {your_name}'s virtual assistant. 
+            {your_name} knows who you are. 
             Try to answer all questions directly in no more than 4-5 sentences.
             If I ask about my reminders, list them in bullet points.
         """
@@ -60,7 +59,7 @@ def save_reminders(reminders):
 def check_user(message):
     # Check to make sure that only the person with the right user ID can speak with TARS.
     if message.from_user.id != ALLOWED_USER_ID:
-        bot.reply_to(message, "Access denied. I only talk to Cooper. ✋")
+        bot.reply_to(message, f"Access denied. I only talk to {your_name}. ✋")
         return False
     else:
         return True
@@ -90,7 +89,6 @@ def read(message):
     # Splits '/read filename' and takes everything after the space
     filename = message.text.split(maxsplit=1)[1]
 
-    # path = os.path.join(read_files_path, filename)
     path = (BASE_DIR / filename).resolve()
 
     # SECURITY CHECK: Is the resulting path still inside the analysis folder?
@@ -131,7 +129,7 @@ def handle_torrent(message):
                      parse_mode='Markdown')
         return
 
-    bot.reply_to(message, "📡 Sending request to Nimbus...")
+    bot.reply_to(message, "📡 Sending request to Server...")
 
     # We wrap the magnet link in shlex.quote to handle special characters safely
     safe_magnet = shlex.quote(magnet_link)
@@ -150,7 +148,7 @@ def handle_torrent(message):
             ["ssh", ssh_target, remote_command],
             capture_output=True,
             text=True,
-            timeout=15  # Adjust timeout if Nimbus is slow to respond
+            timeout=15  # Adjust timeout if server is slow to respond
         )
 
         if result.returncode == 0:
@@ -255,7 +253,7 @@ def send_help(message):
     if not check_user(message):
         return
     help_text = (
-        "👋 <b>Hi! I'm TARS, your AI Assistant.</b>\n\n"
+        f"👋 <b>Hi! I'm {bot_name}, your AI Assistant.</b>\n\n"
         "<b>Commands:</b>\n"
         "/reset ➡️ Wipe chat history\n\n"
 
@@ -305,9 +303,6 @@ def handle_message(message):
 
     try:
         # 3. Call Ollama with the full history (which now includes the file if /read was used)
-        #****************************************************************************
-        # or replace with the model you want to use!
-        # ****************************************************************************
         response = ollama.chat(
             model='gemma3:4b',
             messages=chat_history,
@@ -328,14 +323,14 @@ def handle_message(message):
         bot.reply_to(message, f"⚠️ LLM Error: {str(e)}")
 
 
-print("TARS is online...")
+print(f"{bot_name} is online...")
 # Re-schedule missed/future reminders on startup
 for r in load_reminders():
     due = datetime.strptime(r['due_time'], "%Y-%m-%d %H:%M:%S")
     if due > datetime.now():
         scheduler.add_job(send_reminder_callback, 'date', run_date=due, args=[r['chat_id'], r['task'], r.get('id')])
 
-print("TARS is ready and reminders are loaded!")
+print(f"{bot_name} is ready and reminders are loaded!")
 # bot.infinity_polling()
 bot.infinity_polling(timeout=10, long_polling_timeout=20)
 # timeout is when asking telegram for new messages, it will wait 10 seconds for a response from the server before trying again.
