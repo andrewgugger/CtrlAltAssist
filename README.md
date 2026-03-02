@@ -73,11 +73,11 @@ You will receive a telegram message of your reminder. You can also ask the LLM w
 
 ## 🚀 Project Roadmap
 
-| Feature                       | Status                                                                | Description                                                      |
-|:------------------------------|:----------------------------------------------------------------------|:-----------------------------------------------------------------|
-| **Change Model**              | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)     | Allows the user to switch the local LLM they are using from the chat. |
-| **Natural Language Reminder** | ![In Progress](https://img.shields.io/badge/Status-Planned-lightgrey) | Enable users to set reminders using natural language.            |
-| **Start-up Script**           | ![In Progress](https://img.shields.io/badge/Status-Planned-lightgrey) | Run a startup script to help users with installation.            |
+| Feature                       | Status                                                                 | Description                                                      |
+|:------------------------------|:-----------------------------------------------------------------------|:-----------------------------------------------------------------|
+| **Change Model**              | ![In Progress](https://img.shields.io/badge/Status-In_Progress-orange) | Allows the user to switch the local LLM they are using from the chat. |
+| **Natural Language Reminder** | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)      | Enable users to set reminders using natural language.            |
+| **Start-up Script**           | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)      | Run a startup script to help users with installation.            |
 
 ---
 ## ⚠️ Disclaimer
