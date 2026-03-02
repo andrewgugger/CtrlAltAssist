@@ -18,6 +18,7 @@ TOKEN = os.getenv("TELEGRAM_TOKEN")
 ALLOWED_USER_ID = int(os.getenv("ALLOWED_USER_ID"))
 your_name = os.getenv("YOUR_NAME")
 bot_name = os.getenv("BOT_NAME")
+model = os.getenv("MODEL_NAME")
 
 bot = telebot.TeleBot(TOKEN)
 # json file storing all reminders
@@ -70,6 +71,58 @@ def send_long_message(chat_id, text):
     # This function split up replies and send them as multiple messages.
     for i in range(0, len(text), 4000):
         bot.send_message(chat_id, text[i:i + 4000])
+
+
+def get_installed_models():
+    try:
+        models_data = ollama.list()
+        # In the latest library, 'models' is an attribute, and each model has a '.model' property
+        return [m.model for m in models_data.models]
+    except Exception as e:
+        # If the above fails, try the dictionary method as a fallback
+        try:
+            return [m['name'] for m in ollama.list()['models']]
+        except:
+            print(f"Error fetching models: {e}")
+            return []
+
+
+@bot.message_handler(commands=['id'])
+def get_my_id(message):
+    # This is to get userID for intial setup
+    bot.reply_to(message, f"Your User ID is: {message.from_user.id}")
+
+
+@bot.message_handler(commands=['model'])
+def change_model(message):
+    # command to remove the LLM's chat history.
+    if not check_user(message):
+        return
+    global model
+    installed_models = get_installed_models()
+    parts = message.text.split(maxsplit=1)
+
+    if len(parts) < 2:
+        # No model name provided: List available ones
+        models_list = "\n".join([f"• <code>{m}</code>" for m in installed_models])
+        response = (
+            f"Current Model: <b>{model}</b>\n"
+            f"<b>Available Models:</b>\n{models_list}\n\n"
+            "To change to a different model, type:\n<code>/model [model-name]</code>\n"
+            "Example:\n"
+            "/model gemma3:4b\n"
+        )
+        bot.reply_to(message, response, parse_mode='HTML')
+        return
+
+    new_model = parts[1].strip()
+    # Check if the requested model actually exists
+    if new_model in installed_models:
+        model = new_model
+        bot.reply_to(message, f"✅ Model switched to: <code>{model}</code>", parse_mode='HTML')
+    else:
+        bot.reply_to(message, f"❌ Error: <code>{new_model}</code> is not installed.\n"
+                              f"Use /model to see the list of available models.", parse_mode='HTML')
 
 
 @bot.message_handler(commands=['reset'])
@@ -269,6 +322,11 @@ def send_help(message):
         "/remind 10m buy milk ➡️ Use m for minutes, h for hours, and d for days.\n"
         "/clear_reminders ➡️ Clear the JSON file\n\n"
 
+        "<b>How to change the current model:</b>\n"
+        f"Current Model: <b>{model}</b>\n"
+        "/model ➡️ see all the models available.\n"
+        "/model [name-name] ➡️ To change to a different model\n\n"
+
         "/exit ➡️ Stop the bot and end the python script.\n\n"
 
         "Or simply type a message to chat with me!"
@@ -304,7 +362,7 @@ def handle_message(message):
     try:
         # 3. Call Ollama with the full history (which now includes the file if /read was used)
         response = ollama.chat(
-            model='gemma3:4b',
+            model=model,
             messages=chat_history,
         )
 

@@ -48,7 +48,10 @@ pip install -r requirements.txt
 
 
 ### 3. Configuration
-* Add your telegram token from the [@BotFather](https://t.me/botfather) and user ID to the .env file.
+* Add your telegram token from the [@BotFather](https://t.me/botfather) the .env file.
+* Once you configured the connection to Telegram you will notice that the bot will not interact with you unless your 
+  `ALLOWED_USER_ID` is configured. To get this, type `/id` and the bot will reply with your user ID. Paste this into the .env file.
+* Add your name and the name of your bot to the .env file.
 * **The below configuration steps are optional. They are only required to enable the torrent functionality.**
   * Add your ssh target (username and server IP or hostname) and the path where your torrent.py file will be kept to the .env file.
   * Add your qBittorrent username and password to the .env file.
@@ -67,17 +70,19 @@ for you to review. Enter any number of emails you would like it to sort through.
 * `/remind 10m buy milk` Set a reminder, use m for minutes, h for hours, and d for days.
 You will receive a telegram message of your reminder. You can also ask the LLM what reminders you have set using natural language.
 * `/clear_reminders` Clears all reminders you had set.
+* `/model` ➡️ see all the models available.
+  * `/model [name-name]` ➡️ To change to a different model
 * `/exit` Stops the bot and python script.
 
 ---
 
 ## 🚀 Project Roadmap
 
-| Feature                       | Status                                                                 | Description                                                      |
-|:------------------------------|:-----------------------------------------------------------------------|:-----------------------------------------------------------------|
-| **Change Model**              | ![In Progress](https://img.shields.io/badge/Status-In_Progress-orange) | Allows the user to switch the local LLM they are using from the chat. |
-| **Natural Language Reminder** | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)      | Enable users to set reminders using natural language.            |
-| **Start-up Script**           | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)      | Run a startup script to help users with installation.            |
+| Feature                       | Status                                                             | Description                                                      |
+|:------------------------------|:-------------------------------------------------------------------|:-----------------------------------------------------------------|
+| **Change Model**              | ![In Progress](https://img.shields.io/badge/Status-Complete-Green) | Allows the user to switch the local LLM they are using from the chat. |
+| **Natural Language Reminder** | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)  | Enable users to set reminders using natural language.            |
+| **Start-up Script**           | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)  | Run a startup script to help users with installation.            |
 
 ---
 ## ⚠️ Disclaimer
