@@ -17,17 +17,7 @@ TARS is a multi-functional AI agent inspired by OpenClaw. Powered by **Python**,
 
 ## 🚀 Getting Started
 
-### 1. Installation
-```bash
-# Clone the repo
-git clone https://github.com/andrewgugger/CtrlAltAssist.git
-cd CtrlAltAssist
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 2. Prerequisites
+### 1. Prerequisites
 * **Python 3.10+**
 * **Ollama** installed and running (with `gemma3:4b` pulled)
 * **Telegram Bot Token** (Get one from [@BotFather](https://t.me/botfather))
@@ -46,12 +36,32 @@ pip install -r requirements.txt
   username ALL=(root) NOPASSWD: /usr/bin/python3 /path/to/torrent.py *
   ```
 
+### 2. Installation
+```bash
+# Clone the repo
+git clone https://github.com/andrewgugger/CtrlAltAssist.git
+cd CtrlAltAssist
+
+# Install dependencies
+pip install -r requirements.txt
+# Begin configuation with startup script
+python3 ./startup.py
+```
 
 ### 3. Configuration
-* Add your telegram token from the [@BotFather](https://t.me/botfather) the .env file.
-* Once you configured the connection to Telegram you will notice that the bot will not interact with you unless your 
-  `ALLOWED_USER_ID` is configured. To get this, type `/id` and the bot will reply with your user ID. Paste this into the .env file.
-* Add your name and the name of your bot to the .env file.
+* Add your telegram token from the [@BotFather](https://t.me/botfather) and use it during the startup script.
+* Perform the steps in the startup script to generate the .env file. This is an example of what the .env file will look like once compelted (this can also be manually created):
+```commandline
+YOUR_NAME=Cooper
+BOT_NAME=TARS
+MODEL_NAME=gemma3:4b
+TELEGRAM_TOKEN=asdf
+ALLOWED_USER_ID=1234
+SSH_TARGET=user@server
+TORRENT_PATH=/path/to/torrent.py
+QBT_USER=user
+QBT_PASS=password
+```
 * **The below configuration steps are optional. They are only required to enable the torrent functionality.**
   * Add your ssh target (username and server IP or hostname) and the path where your torrent.py file will be kept to the .env file.
   * Add your qBittorrent username and password to the .env file.
@@ -82,7 +92,7 @@ You will receive a telegram message of your reminder. You can also ask the LLM w
 |:------------------------------|:-------------------------------------------------------------------|:-----------------------------------------------------------------|
 | **Change Model**              | ![In Progress](https://img.shields.io/badge/Status-Complete-Green) | Allows the user to switch the local LLM they are using from the chat. |
 | **Natural Language Reminder** | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)  | Enable users to set reminders using natural language.            |
-| **Start-up Script**           | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey)  | Run a startup script to help users with installation.            |
+| **Start-up Script**           | ![Planned](https://img.shields.io/badge/Status-Complete-Green)     | Run a startup script to help users with installation.            |
 
 ---
 ## ⚠️ Disclaimer
